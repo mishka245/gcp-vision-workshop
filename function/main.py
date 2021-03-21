@@ -3,17 +3,18 @@ import json
 # Imports the Google Cloud client library
 from google.cloud import vision
 
+HEADERS = {
+    "Access-Control-Allow-Origin": None,
+    "Access-Control-Allow-Methods": "POST",
+    "Content-Type": "application/json",
+}
+
 # Instantiates a client
 client = vision.ImageAnnotatorClient()
 
 
-def print_labels(labels):
-    print('Labels:')
-    for label in labels:
-        print(label.description)
-
-
 def main(request):
+    HEADERS["Access-Control-Allow-Origin"] = request.headers.get("origin")  # Allow all origin
     if request.method == "POST":
         file = request.files["file"]
         content = file.read()
@@ -24,8 +25,8 @@ def main(request):
         response = client.label_detection(image=image)
         labels = response.label_annotations
 
-        print_labels(labels)
+        result = [{"label": label.description, "score": label.score} for label in labels]
 
-        return json.dumps(labels), 200
+        return json.dumps(result), 200, HEADERS
 
-    return "Not Found", 404
+    return "Not Found", 404, HEADERS
