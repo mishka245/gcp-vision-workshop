@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dogs and Cats - Image Classifier</title>
+
+    <link rel="stylesheet" href="index.css">
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div style="text-align: center">
+    <div>
+        <img id="uploaded-image" src="" alt="Image"/>
+        <br>
+        <input type='file' onchange="readURL(this);"/>
+
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <label for="dog">Dog:</label>
+    <progress id="dog" value="0" max="100"></progress>
+    <p id="dog-percent" style="display: inline">0%</p>
+    <br>
+    <label for="cat">Cat:</label>
+    <progress id="cat" value="0" max="100"></progress>
+    <p id="cat-percent" style="display: inline">0%</p>
+
+    <script src="index.js"></script>
+</div>
+</body>
+</html>
